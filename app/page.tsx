@@ -1,9 +1,11 @@
+import React from "react";
 import Container from "@/components/container";
-import ExperienceSection from "@/components/experience-section";
-import HeroSection from "@/components/hero-section";
 import { AnimatedGroup } from "@/components/ui/animated-group";
 import { Variants } from "framer-motion";
-import React from "react";
+import HeroSection from "@/components/hero-section";
+import ExperienceSection from "@/components/experience-section";
+import WorkSection from "@/components/work-section";
+import EducationSection from "@/components/education-section";
 
 export const customItemVariants: Variants = {
   hidden: {
@@ -53,6 +55,14 @@ const page = () => {
         variantItem={customItemVariants}
         />
         <ExperienceSection
+        variantContainer={sectionContainerVariants} 
+        variantItem={customItemVariants}
+        />
+        <WorkSection
+        variantContainer={sectionContainerVariants} 
+        variantItem={customItemVariants}
+        />
+        <EducationSection
         variantContainer={sectionContainerVariants} 
         variantItem={customItemVariants}
         />
