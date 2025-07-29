@@ -38,10 +38,10 @@ const EducationSection = ({ variantContainer, variantItem }: any) => {
                             >
                                 {edu.institution}
                             </Link>
-                            <p className="text-zinc-400">
+                            <p className="text-zinc-400 text-sm md:text-base">
                                 {edu.degree}, {edu.fieldOfStudy}
                             </p>
-                                 <p className="text-zinc-500 text-sm">
+                                 <p className="text-zinc-500 text-xs md:text-sm">
                                 {edu.percentage}, {edu.startYear} - {edu.endYear}
                             </p>
                         </div>
