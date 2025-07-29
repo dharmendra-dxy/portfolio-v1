@@ -5,8 +5,10 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
 import { AnimatedGroup } from "./ui/animated-group";
+import Badge from "./badge";
+import { div } from "framer-motion/client";
 
-const HeroSection = ({ variantContainer, variantItem }:any) => {
+const HeroSection = ({ variantContainer, variantItem }: any) => {
   return (
     <div>
 
@@ -38,9 +40,15 @@ const HeroSection = ({ variantContainer, variantItem }:any) => {
           <p className="mt-4 text-zinc-300 max-w-2xl text-lg">
             {profile.summary}
           </p>
-          <p className="mt-2 text-zinc-400 max-w-3xl">
-            {profile.currentWork}
-          </p>
+          <div className="mt-2 text-zinc-400 max-w-3xl flex flex-wrap items-center gap-x-2 gap-y-1 w-full break-normal">
+            {profile.currentWork.textLine1}
+            {profile.currentWork.stack.map((item, index) => (
+              <div key={index} className="">
+              <Badge url={item.icon} title={item.title}/>
+            </div>
+            ))}
+            {profile.currentWork.textLine2}
+          </div>
           <div className="mt-4 flex items-center space-x-4">
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>

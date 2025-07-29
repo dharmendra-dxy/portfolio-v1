@@ -7,7 +7,18 @@ export const profile = {
     title: 'full-Stack Engineer',
     summary: 'I craft scalable, intelligent software systems - from modern web apps to AI integrations for startups and enterprise teams.',
 
-    currentWork: "Currently building with Typescript, Python, Docker, and cloud native tools.Open-source contributor & tech writer. Always learning, always shipping.",
+    // currentWork: "Currently building with Typescript, Python, Docker, and cloud native tools.Open-source contributor & tech writer. Always learning, always shipping.",
+    currentWork: {
+        textLine1: "Currently building with",
+        stack: [
+            {icon: '/icons/javascript.png',  title: 'Typescript'},
+            {icon: '/icons/nextjs.png',  title: 'NextJS'},
+            {icon: '/icons/react.png',  title: 'React'},
+            {icon: '/icons/aws.png',  title: 'AWS'},
+            {icon: '/icons/vscode.png',  title: 'Vscode'},
+        ],
+        textLine2:"and cloud native tools. Open-source contributor & tech writer. Always learning, always shipping.",
+    },
 
     socials: [
         {icon: Linkedin, url: 'https://www.linkedin.com/in/dharmendra-dxy '},

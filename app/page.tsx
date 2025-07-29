@@ -7,6 +7,7 @@ import ExperienceSection from "@/components/experience-section";
 import WorkSection from "@/components/work-section";
 import EducationSection from "@/components/education-section";
 import GitHubContributions from "@/components/github-contributions";
+import SkillsSection from "@/components/skills-section";
 
 export const customItemVariants: Variants = {
   hidden: {
@@ -64,11 +65,14 @@ const page = () => {
         variantItem={customItemVariants}
         />
         <GitHubContributions/>
+        <SkillsSection
+        variantContainer={sectionContainerVariants} 
+        variantItem={customItemVariants}
+        />
         <EducationSection
         variantContainer={sectionContainerVariants} 
         variantItem={customItemVariants}
         />
-        
       </Container>
     </AnimatedGroup>
   );
