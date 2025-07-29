@@ -26,5 +26,7 @@ export const profile = {
         {icon: Twitter, url: 'https://github.com/dharmendra-dxy'},
         {icon: Mail, url: 'https://github.com/dharmendra-dxy'},
         {icon: FileText, url: 'https://drive.google.com/file/d/1kR_pCkhQ2mQCPNyLgjjKI-w1u97b1ms7/view'},
-    ]
+    ],
+    contact: "+91 6306450212",
+    mail: "dharmendrayadav747392@gmail.com",
 };

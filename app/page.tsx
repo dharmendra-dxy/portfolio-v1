@@ -8,6 +8,9 @@ import WorkSection from "@/components/work-section";
 import EducationSection from "@/components/education-section";
 import GitHubContributions from "@/components/github-contributions";
 import SkillsSection from "@/components/skills-section";
+import ContactSection from "@/components/contact-section";
+import Footer from "@/components/footer";
+import ReachoutSection from "@/components/reachout-section";
 
 export const customItemVariants: Variants = {
   hidden: {
@@ -73,6 +76,15 @@ const page = () => {
         variantContainer={sectionContainerVariants} 
         variantItem={customItemVariants}
         />
+        <ContactSection
+        variantContainer={sectionContainerVariants} 
+        variantItem={customItemVariants}
+        />
+        <ReachoutSection
+        variantContainer={sectionContainerVariants} 
+        variantItem={customItemVariants}
+        />
+        <Footer/>
       </Container>
     </AnimatedGroup>
   );

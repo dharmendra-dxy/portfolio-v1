@@ -1,4 +1,3 @@
-
 import { profile } from "@/constant/profile";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +5,6 @@ import React from "react";
 import { Button } from "./ui/button";
 import { AnimatedGroup } from "./ui/animated-group";
 import Badge from "./badge";
-import { div } from "framer-motion/client";
 
 const HeroSection = ({ variantContainer, variantItem }: any) => {
   return (
