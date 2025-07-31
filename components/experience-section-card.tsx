@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Building2, ChevronsDown } from 'lucide-react';
 import { ExperienceItem } from './experience-section';
+import Image from 'next/image';
 
 interface ExperienceItemProps {
     exp: ExperienceItem
@@ -62,15 +63,20 @@ const ExperienceSectionCard = ({ exp }: ExperienceItemProps) => {
 
                 {/* Company and Role Info */}
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4 space-y-2 md:space-y-0">
-                    <div>
-                        <motion.h4
-                            className="text-lg md:text-xl font-semibold text-white"
-                            animate={{ color: isHovered ? '#f87171' : '#ffffff' }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            {exp.role}
-                        </motion.h4>
-                        <p className="text-zinc-300 font-medium text-sm md:text-base">{exp.company}</p>
+                    <div className='flex justify-between gap-4'>
+                        <div>
+                            <motion.h4
+                                className="text-lg md:text-xl font-semibold text-white"
+                                animate={{ color: isHovered ? '#f87171' : '#ffffff' }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                {exp.role}
+                            </motion.h4>
+                            <p className="text-zinc-300 font-medium text-sm md:text-base">{exp.company}</p>
+                        </div>
+                        <div className='mt-1'>
+                            {exp.url && <Image src={exp?.url} alt={exp?.company} height={20} width={100} className={`not-target:object-cover rounded-sm  overflow-hidden ${isHovered ? "scale-105 duration-300  border-red-400" : ""}`} />}
+                        </div>
                     </div>
                     <span className="text-xs md:text-sm text-zinc-500 bg-zinc-800 px-2 md:px-3 py-1 rounded-full self-start border border-neutral-700">
                         {exp.duration}

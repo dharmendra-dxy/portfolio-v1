@@ -12,6 +12,7 @@ export interface ExperienceItem {
     description: {
         title: string;
     }[];
+    url?: string;
 }
 
 const ExperienceSection = ({ variantContainer, variantItem }: any) => {

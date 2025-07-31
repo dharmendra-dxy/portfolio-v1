@@ -4,18 +4,17 @@ export const profile = {
     avatar: '/avatar.png',
     name: 'Dharmendra Yadav',
     handle: '@dharmendra-dxy',
-    title: 'full-Stack Engineer',
+    title: 'Full-Stack Engineer',
     summary: 'I craft scalable, intelligent software systems - from modern web apps to AI integrations for startups and enterprise teams.',
 
     // currentWork: "Currently building with Typescript, Python, Docker, and cloud native tools.Open-source contributor & tech writer. Always learning, always shipping.",
     currentWork: {
         textLine1: "Currently building with",
         stack: [
-            {icon: '/icons/javascript.png',  title: 'Typescript'},
+            {icon: '/icons/typescript.png',  title: 'Typescript'},
             {icon: '/icons/nextjs.png',  title: 'NextJS'},
-            {icon: '/icons/react.png',  title: 'React'},
-            {icon: '/icons/aws.png',  title: 'AWS'},
-            {icon: '/icons/vscode.png',  title: 'Vscode'},
+            {icon: '/icons/postgresql.png',  title: 'Postgresql'},
+            {icon: '/icons/docker.png',  title: 'Docker'},
         ],
         textLine2:"and cloud native tools. Open-source contributor & tech writer. Always learning, always shipping.",
     },

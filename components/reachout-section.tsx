@@ -61,7 +61,7 @@ const ReachoutSection = ({ variantContainer, variantItem }: any) => {
   return (
     <section className="max-w-4xl">
       <div className="flex items-center space-x-3 mb-6">
-        <div className="p-2 bg-red-400/10 rounded-lg">
+        <div>
           <Phone size={24} className="text-red-400" />
         </div>
         <h3 className="text-xl font-bold text-white">Reach Out</h3>
