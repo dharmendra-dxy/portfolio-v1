@@ -2,14 +2,14 @@ import { profile } from "@/constant/profile";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { Button } from "./ui/button";
-import { AnimatedGroup } from "./ui/animated-group";
-import Badge from "./badge";
+import { Button } from "../ui/button";
+import { AnimatedGroup } from "../ui/animated-group";
+import Badge from "../badge";
+import { customItemVariants, sectionContainerVariants } from "@/lib/framer-variants";
 
-const HeroSection = ({ variantContainer, variantItem }: any) => {
+const HeroSection = () => {
   return (
     <div>
-
       <header className="flex items-center space-x-4">
         <Image
           src={profile.avatar}
@@ -27,8 +27,8 @@ const HeroSection = ({ variantContainer, variantItem }: any) => {
       <section className="mt-16">
         <AnimatedGroup
           variants={{
-            container: variantContainer,
-            item: variantItem,
+            container: sectionContainerVariants,
+            item: customItemVariants,
           }}
         >
 
@@ -65,7 +65,7 @@ const HeroSection = ({ variantContainer, variantItem }: any) => {
                   },
                 },
               },
-              item: variantItem,
+              item: sectionContainerVariants,
             }}
             className="mt-6 flex space-x-4"
           >

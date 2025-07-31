@@ -2,11 +2,12 @@ import React from "react";
 import Image from "next/image";
 import { profile } from "@/constant/profile";
 import { ArrowUpRightIcon, CodeIcon, GithubIcon } from "lucide-react";
-import { AnimatedGroup } from "./ui/animated-group";
+import { AnimatedGroup } from "../ui/animated-group";
 import { works } from "@/constant/works";
 import Link from "next/link";
+import { customItemVariants, sectionContainerVariants } from "@/lib/framer-variants";
 
-const WorkSection = ({ variantContainer, variantItem }: any) => {
+const WorkSection = () => {
   return(
     <section>
           <div className="flex items-center justify-between">
@@ -26,8 +27,8 @@ const WorkSection = ({ variantContainer, variantItem }: any) => {
           </div>
           <AnimatedGroup
             variants={{
-              container: variantContainer,
-              item: variantItem,
+              container: sectionContainerVariants,
+              item: customItemVariants,
             }}
             className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4"
           >

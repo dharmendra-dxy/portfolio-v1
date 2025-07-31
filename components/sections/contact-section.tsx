@@ -1,14 +1,15 @@
 'use client';
 
 import React, { useState } from "react";
-import { AnimatedGroup } from "./ui/animated-group";
+import { AnimatedGroup } from "../ui/animated-group";
 import { Mail, Send } from "lucide-react";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
-import { Button } from "./ui/button";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import { Button } from "../ui/button";
+import { customItemVariants, sectionContainerVariants } from "@/lib/framer-variants";
 
-const ContactSection = ({ variantContainer, variantItem }: any) => {
+const ContactSection = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -41,8 +42,8 @@ const ContactSection = ({ variantContainer, variantItem }: any) => {
             </div>
             <AnimatedGroup
                 variants={{
-                    container: variantContainer,
-                    item: variantItem,
+                    container: sectionContainerVariants,
+                    item: customItemVariants,
                 }}
                 className="mt-4 space-y-6 pl-2 md:pl-6"
             >

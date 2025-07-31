@@ -1,43 +1,16 @@
 import React from "react";
 import Container from "@/components/container";
 import { AnimatedGroup } from "@/components/ui/animated-group";
-import { Variants } from "framer-motion";
-import HeroSection from "@/components/hero-section";
-import ExperienceSection from "@/components/experience-section";
-import WorkSection from "@/components/work-section";
-import EducationSection from "@/components/education-section";
-import GitHubContributions from "@/components/github-contributions";
-import SkillsSection from "@/components/skills-section";
-import ContactSection from "@/components/contact-section";
+import { customItemVariants } from "@/lib/framer-variants";
+import HeroSection from "@/components/sections/hero-section";
+import ExperienceSection from "@/components/sections/experience-section";
+import WorkSection from "@/components/sections/work-section";
+import EducationSection from "@/components/sections/education-section";
+import GitHubContributions from "@/components/sections/github-contributions";
+import SkillsSection from "@/components/sections/skills-section";
+import ContactSection from "@/components/sections/contact-section";
+import ReachoutSection from "@/components/sections/reachout-section";
 import Footer from "@/components/footer";
-import ReachoutSection from "@/components/reachout-section";
-
-export const customItemVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    filter: "blur(12px)",
-    y: 12,
-  },
-  visible: {
-    opacity: 1,
-    filter: "blur(0px)",
-    y: 0,
-    transition: {
-      type: "spring",
-      bounce: 0.3,
-      duration: 1.5,
-    },
-  },
-};
-
-export const sectionContainerVariants: Variants = {
-  visible: {
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
-    },
-  },
-};
 
 const page = () => {
   return (
@@ -55,35 +28,14 @@ const page = () => {
       }}
     >
       <Container>
-        <HeroSection 
-        variantContainer={sectionContainerVariants} 
-        variantItem={customItemVariants}
-        />
-        <ExperienceSection
-        variantContainer={sectionContainerVariants} 
-        variantItem={customItemVariants}
-        />
-        <WorkSection
-        variantContainer={sectionContainerVariants} 
-        variantItem={customItemVariants}
-        />
+        <HeroSection/>
+        <ExperienceSection/>
+        <WorkSection/>
         <GitHubContributions/>
-        <SkillsSection
-        variantContainer={sectionContainerVariants} 
-        variantItem={customItemVariants}
-        />
-        <EducationSection
-        variantContainer={sectionContainerVariants} 
-        variantItem={customItemVariants}
-        />
-        <ContactSection
-        variantContainer={sectionContainerVariants} 
-        variantItem={customItemVariants}
-        />
-        <ReachoutSection
-        variantContainer={sectionContainerVariants} 
-        variantItem={customItemVariants}
-        />
+        <SkillsSection/>
+        <EducationSection/>
+        <ContactSection/>
+        <ReachoutSection/>
         <Footer/>
       </Container>
     </AnimatedGroup>

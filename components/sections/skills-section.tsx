@@ -1,10 +1,11 @@
 import { skills } from "@/constant/skills";
 import { CodeXml } from "lucide-react";
 import React from "react";
-import { AnimatedGroup } from "./ui/animated-group";
-import Badge from "./badge";
+import { AnimatedGroup } from "../ui/animated-group";
+import Badge from "../badge";
+import { customItemVariants, sectionContainerVariants } from "@/lib/framer-variants";
 
-const SkillsSection = ({ variantContainer, variantItem }: any) => {
+const SkillsSection = () => {
     return (
         <section>
             <div className="flex items-center space-x-3">
@@ -13,12 +14,12 @@ const SkillsSection = ({ variantContainer, variantItem }: any) => {
             </div>
             <AnimatedGroup
                 variants={{
-                    container: variantContainer,
-                    item: variantItem,
+                    container: sectionContainerVariants,
+                    item: customItemVariants,
                 }}
                 className="mt-4 space-y-3 sm:space-y-4 flex flex-wrap gap-x-4 sm:gap-x-6"
             >
-                {skills.map((skill, index) => (
+                {skills.map((skill) => (
                     <div key={skill.icon}>
                         <Badge url={skill.icon} title={skill.title} />
                     </div>

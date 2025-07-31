@@ -1,10 +1,8 @@
 import React from "react";
 import { Phone, Mail, MapPin, Clock, Send, ExternalLink } from "lucide-react";
+import { customItemVariants, sectionContainerVariants } from "@/lib/framer-variants";
+import { AnimatedGroup } from "../ui/animated-group";
 
-// Mock AnimatedGroup component
-const AnimatedGroup = ({ children, className, variants }: any) => {
-  return <div className={className}>{children}</div>;
-};
 
 // Mock profile data
 const profile = {
@@ -14,7 +12,7 @@ const profile = {
   timezone: "IST (+5:30)"
 };
 
-const ReachoutSection = ({ variantContainer, variantItem }: any) => {
+const ReachoutSection = () => {
   const contactMethods = [
     {
       icon: Phone,
@@ -69,8 +67,8 @@ const ReachoutSection = ({ variantContainer, variantItem }: any) => {
       
       <AnimatedGroup
         variants={{
-          container: variantContainer,
-          item: variantItem,
+          container: sectionContainerVariants,
+          item: customItemVariants,
         }}
         className="space-y-4"
       >
@@ -113,9 +111,9 @@ const ReachoutSection = ({ variantContainer, variantItem }: any) => {
         <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-gray-800/30 to-gray-700/20 border border-gray-700/30">
           <div className="flex flex-col md:flex-row mb-2 md:mt-0 items-center justify-between">
             <div>
-              <h4 className="text-lg font-semibold text-white mb-2">Let's Connect!</h4>
+              <h4 className="text-lg font-semibold text-white mb-2">Let&apos;s Connect!</h4>
               <p className="text-gray-300 text-sm">
-                Ready to discuss your next project? I'm just a message away.
+                Ready to discuss your next project? I&apos;m just a message away.
               </p>
             </div>
             <div className="flex space-x-3 mt-4">

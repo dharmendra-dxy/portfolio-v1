@@ -1,9 +1,9 @@
 import React from 'react';
 import { BriefcaseIcon } from 'lucide-react';
-import ExperienceSectionCard from './experience-section-card';
-import { AnimatedGroup } from './ui/animated-group';
+import ExperienceSectionCard from '../experience-section-card';
+import { AnimatedGroup } from '../ui/animated-group';
 import { experience } from '@/constant/experience';
-
+import { customItemVariants, sectionContainerVariants } from "@/lib/framer-variants";
 export interface ExperienceItem {
     id: number,
     company: string,
@@ -15,7 +15,7 @@ export interface ExperienceItem {
     url?: string;
 }
 
-const ExperienceSection = ({ variantContainer, variantItem }: any) => {
+const ExperienceSection = () => {
 
     return (
         <section>
@@ -28,8 +28,8 @@ const ExperienceSection = ({ variantContainer, variantItem }: any) => {
 
             <AnimatedGroup
                 variants={{
-                    container: variantContainer,
-                    item: variantItem,
+                    container: sectionContainerVariants,
+                    item: customItemVariants,
                 }}
                 className="mt-8 space-y-4 md:space-y-6 pl-6 ml-2 border-l-2 border-red-400"
             >

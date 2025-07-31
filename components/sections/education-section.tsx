@@ -1,11 +1,13 @@
 import { GraduationCapIcon } from "lucide-react";
 import React from "react";
-import { AnimatedGroup } from "./ui/animated-group";
+import { AnimatedGroup } from "../ui/animated-group";
 import Image from "next/image";
 import Link from "next/link";
 import { education } from "@/constant/education";
+import { customItemVariants, sectionContainerVariants } from "@/lib/framer-variants";
 
-const EducationSection = ({ variantContainer, variantItem }: any) => {
+
+const EducationSection = () => {
     return (
         <section>
             <div className="flex items-center space-x-3">
@@ -14,8 +16,8 @@ const EducationSection = ({ variantContainer, variantItem }: any) => {
             </div>
             <AnimatedGroup
                 variants={{
-                    container: variantContainer,
-                    item: variantItem,
+                    container: sectionContainerVariants,
+                    item: customItemVariants,
                 }}
                 className="mt-4 space-y-6 pl-6"
             >
