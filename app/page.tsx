@@ -1,5 +1,4 @@
 import React from "react";
-import Container from "@/components/container";
 import { AnimatedGroup } from "@/components/ui/animated-group";
 import { customItemVariants } from "@/lib/framer-variants";
 import HeroSection from "@/components/sections/hero-section";
@@ -11,6 +10,7 @@ import SkillsSection from "@/components/sections/skills-section";
 import ContactSection from "@/components/sections/contact-section";
 import ReachoutSection from "@/components/sections/reachout-section";
 import Footer from "@/components/footer";
+import Container from "@/components/Container";
 
 const page = () => {
   return (
@@ -35,7 +35,7 @@ const page = () => {
         <SkillsSection/>
         <EducationSection/>
         <ContactSection/>
-        <ReachoutSection/>
+        {/* <ReachoutSection/> */}
         <Footer/>
       </Container>
     </AnimatedGroup>
