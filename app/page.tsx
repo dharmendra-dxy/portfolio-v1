@@ -8,9 +8,9 @@ import EducationSection from "@/components/sections/education-section";
 import GitHubContributions from "@/components/sections/github-contributions";
 import SkillsSection from "@/components/sections/skills-section";
 import ContactSection from "@/components/sections/contact-section";
-import ReachoutSection from "@/components/sections/reachout-section";
 import Footer from "@/components/footer";
 import Container from "@/components/Container";
+import ConnectSection from "@/components/sections/connect-section";
 
 const page = () => {
   return (
@@ -35,7 +35,7 @@ const page = () => {
         <SkillsSection/>
         <EducationSection/>
         <ContactSection/>
-        {/* <ReachoutSection/> */}
+        <ConnectSection />
         <Footer/>
       </Container>
     </AnimatedGroup>

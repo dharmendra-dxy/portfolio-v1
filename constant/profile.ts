@@ -1,7 +1,7 @@
 import { FileText,  Github, Linkedin, Mail, Twitter } from "lucide-react";
 
 export const profile = {
-    avatar: '/avatar.png',
+    avatar: '/logo/avatar.png',
     name: 'Dharmendra Yadav',
     handle: '@dharmendra-dxy',
     title: 'Full-Stack Engineer',
@@ -13,7 +13,8 @@ export const profile = {
         stack: [
             {icon: '/icons/typescript.png',  title: 'Typescript'},
             {icon: '/icons/nextjs.png',  title: 'NextJS'},
-            {icon: '/icons/postgresql.png',  title: 'Postgresql'},
+            {icon: '/icons/express.png',  title: 'Express'},
+            // {icon: '/icons/postgresql.png',  title: 'Postgresql'},
             {icon: '/icons/docker.png',  title: 'Docker'},
         ],
         textLine2:"and cloud native tools. Open-source contributor & tech writer. Always learning, always shipping.",

@@ -1,7 +1,7 @@
 export const education = [
     {
         institution: 'Raj Kumar Goel Institute Of Technology',
-        logo: '/rkgit.jpg',
+        logo: '/logo/rkgit.jpg',
         site: 'https://rkgit.edu.in/',
         degree: 'Bachelor of Technology',
         fieldOfStudy: 'Computer Science and Engineering (DS)',
@@ -11,7 +11,7 @@ export const education = [
     },
     {
         institution: "St. Joseph's Sr. Secondary School",
-        logo: '/school.jpg',
+        logo: '/logo/school.jpg',
         site: 'https://www.sjsrihand.com/',
         degree: 'Higher Secondary',
         fieldOfStudy: 'Science',
