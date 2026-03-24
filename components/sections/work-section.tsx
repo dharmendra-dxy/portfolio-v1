@@ -24,7 +24,6 @@ const WorkSection = () => {
 
         <Link
           href="/projects"
-          target="_blank"
           className="text-zinc-400 flex items-center space-x-1 hover:text-red-400 transition-colors"
         >
           <span>more</span>
