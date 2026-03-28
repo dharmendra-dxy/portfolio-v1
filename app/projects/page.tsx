@@ -6,7 +6,7 @@ import { SearchIcon } from "lucide-react";
 import { ProjectCard } from "@/components/project-card";
 import { motion, Variants } from "framer-motion";
 
-export const containerVariants: Variants = {
+ const containerVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -17,24 +17,24 @@ export const containerVariants: Variants = {
   },
 };
 
-export const itemVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-    scale: 0.98,
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.4,
-      ease: [0.25, 0.1, 0.25, 1],
-    },
-  },
-};
+//  const itemVariants: Variants = {
+//   hidden: {
+//     opacity: 0,
+//     y: 20,
+//     scale: 0.98,
+//   },
+//   show: {
+//     opacity: 1,
+//     y: 0,
+//     scale: 1,
+//     transition: {
+//       duration: 0.4,
+//       ease: [0.25, 0.1, 0.25, 1],
+//     },
+//   },
+// };
 
-export const fadeUp: Variants = {
+ const fadeUp: Variants = {
   hidden: { opacity: 0, y: 25 },
   show: {
     opacity: 1,

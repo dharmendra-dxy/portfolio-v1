@@ -2,7 +2,7 @@ export const works = [
   {
     title: "Bits and Byte Blog",
     link: "https://bitsandbyte-blog.vercel.app/",
-    github: "https://github.com/yourusername/bitsandbyte",
+    github: "https://github.com/dharmendra-dxy/bitsandbyte-blog",
     cover:
       "https://res.cloudinary.com/dofvsgdbf/image/upload/v1753705798/Screenshot_2025-07-28_175830_eqrlth.png",
     description: "Blog App using Nextjs, Tailwind css and Postgress",
@@ -23,7 +23,7 @@ export const works = [
   {
     title: "Prompt Dekho",
     link: "https://prompt-dekho.vercel.app",
-    github: "https://github.com/yourusername/prompt-dekho",
+    github: "https://github.com/dharmendra-dxy/Prompt_dekho",
     cover:
       "https://res.cloudinary.com/dofvsgdbf/image/upload/v1753734415/prompt-dekho_axqgce.png",
     description: "A website to share and explore prompts categorized by tags.",
@@ -39,7 +39,7 @@ export const works = [
   {
     title: "Veg Delight",
     link: "https://veg-delight.vercel.app/",
-    github: "https://github.com/yourusername/veg-delight",
+    github: "https://github.com/dharmendra-dxy/ddm-template-cafe",
     cover:
       "https://res.cloudinary.com/dofvsgdbf/image/upload/v1753733902/veg-delight_gaujrh.png",
     description: "Modern responsive restaurant landing page.",
@@ -54,7 +54,7 @@ export const works = [
   {
     title: "Nike",
     link: "https://dxy-nikeui.vercel.app/",
-    github: "https://github.com/yourusername/nike-ui",
+    github: "https://github.com/dharmendra-dxy/react-nike-ui",
     cover:
       "https://res.cloudinary.com/dofvsgdbf/image/upload/v1753734279/nike-react-ui_dx8djx.png",
     description: "Modern Nike landing page built with React and Tailwind.",
@@ -69,7 +69,7 @@ export const works = [
   {
     title: "Zentry Redefine Gaming",
     link: "https://dxy-zentry.vercel.app/",
-    github: "https://github.com/yourusername/zentry",
+    github: "https://github.com/dharmendra-dxy/react-zentry-ui",
     cover:
       "https://res.cloudinary.com/dofvsgdbf/image/upload/v1753734282/redefine-gaming_cininw.png",
     description: "Awwwards-style animated gaming website.",

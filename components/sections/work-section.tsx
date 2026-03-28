@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { ArrowUpRightIcon, CodeIcon, GithubIcon, LinkIcon } from "lucide-react";
@@ -9,10 +11,12 @@ import {
   sectionContainerVariants,
 } from "@/lib/framer-variants";
 import { formatDate } from "@/utils/format-date";
-
-
+import { useRouter } from "next/navigation";
 
 const WorkSection = () => {
+
+  const router = useRouter();
+
   return (
     <section>
       {/* Header */}
@@ -43,9 +47,10 @@ const WorkSection = () => {
           const slug = work.title.toLowerCase().replace(/\s+/g, "-");
 
           return (
-            <Link
+            <div
               key={work.title}
-              href={`/projects/${slug}`}
+              // href={`/projects/${slug}`}
+              onClick={()=> router.push(`/projects/${slug}`)}
               className="group flex flex-col gap-2 p-4 border border-zinc-800 rounded-lg hover:bg-zinc-900 hover:border-red-400 transition-all duration-300"
             >
               {/* Image */}
@@ -98,7 +103,7 @@ const WorkSection = () => {
                   </Link>
                 </div>
               </div>
-            </Link>
+            </div>
           );
         })}
       </AnimatedGroup>

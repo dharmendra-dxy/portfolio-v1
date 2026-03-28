@@ -25,13 +25,11 @@ const formatDate = (date?: string) => {
 
 export const ProjectCard = ({
   title,
-  description,
   image,
   link,
   github,
   date,
   slug,
-  variant = "default",
 }: ProjectCardProps) => {
   return (
     <Link
