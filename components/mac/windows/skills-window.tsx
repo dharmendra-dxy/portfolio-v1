@@ -7,6 +7,7 @@ import { Cpu, FolderCog, Search, Star, Wrench } from "lucide-react";
 import { skills } from "@/constant/skills";
 import { cn } from "@/lib/utils";
 import { FinderStatusBar, SidebarGroup, SidebarItem } from "../finder-chrome";
+import { skillTileClass } from "@/components/skill-tile";
 
 type Group = "All" | "Frontend" | "Backend" | "Data" | "Tools" | "Cloud";
 
@@ -99,7 +100,10 @@ export default function SkillsWindow() {
                   alt={skill.title}
                   width={44}
                   height={44}
-                  className="h-11 w-11 rounded-[10px] object-cover shadow-sm transition-transform duration-300 group-hover:scale-110"
+                  className={cn(
+                    "h-11 w-11 rounded-[10px] object-cover shadow-sm transition-transform duration-300 group-hover:scale-110",
+                    skillTileClass(skill.title),
+                  )}
                 />
                 <span className="text-center text-[11.5px] font-medium leading-tight text-zinc-700">
                   {skill.title}
