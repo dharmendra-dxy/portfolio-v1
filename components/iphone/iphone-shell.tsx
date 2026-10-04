@@ -6,7 +6,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import HomeScreen from "./home-screen";
 import { DynamicIsland, HomeIndicator, StatusBar } from "./ios-ui";
-import { APP_TITLES, type IPhoneAppId } from "./iphone-config";
+import type { IPhoneAppId } from "./iphone-config";
 import ProfileApp from "./apps/profile-app";
 import ProjectsApp from "./apps/projects-app";
 import ExperienceApp from "./apps/experience-app";
@@ -16,9 +16,9 @@ import ContactApp from "./apps/contact-app";
 import PhotosApp from "./apps/photos-app";
 import LinksApp from "./apps/links-app";
 import ResumeApp from "./apps/resume-app";
+import { APP_TITLES } from "./iphone-config";
 
-const OPEN_SPRING = { type: "spring" as const, stiffness: 380, damping: 36 };
-const EASE = [0.32, 0.72, 0, 1] as const;
+const APP_TRANSITION = { type: "spring" as const, stiffness: 420, damping: 40, mass: 0.8 };
 
 function renderApp(id: IPhoneAppId, onBack: () => void) {
   switch (id) {
@@ -53,10 +53,13 @@ export default function IPhoneShell() {
   const launch = useCallback((id: IPhoneAppId) => setOpenApp(id), []);
 
   return (
-    <div className="relative flex h-[100dvh] w-full items-center justify-center overflow-hidden bg-[#08080c] sm:bg-[radial-gradient(90%_90%_at_50%_0%,#1d1d24_0%,#08080c_62%)]">
+    <div
+      className="relative flex h-[100dvh] w-full select-none items-center justify-center overflow-hidden overscroll-none bg-[#08080c] sm:bg-[radial-gradient(90%_90%_at_50%_0%,#1d1d24_0%,#08080c_62%)]"
+      style={{ WebkitTapHighlightColor: "transparent" }}
+    >
       {/* Desktop hints */}
       <div className="pointer-events-none absolute inset-x-0 top-7 hidden select-none items-center justify-center gap-2 text-[13px] font-medium tracking-wide text-zinc-500 sm:flex">
-        Tap an app · swipe between home screens · swipe up to go home
+        Tap an app · swipe between home screens · tap the bar to go home
       </div>
 
       {/* Device */}
@@ -74,34 +77,32 @@ export default function IPhoneShell() {
           )}
         >
           <div className="relative flex h-full w-full flex-col overflow-hidden bg-black sm:rounded-[45px]">
-            {/* Wallpaper */}
-            <motion.div
-              initial={{ scale: 1.14, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8, ease: EASE }}
-              className="absolute inset-0 bg-[linear-gradient(168deg,#2a1a4d_0%,#4a2a6b_26%,#8b3a6b_54%,#cf6f4f_78%,#f0a05f_100%)]"
-            >
-              <div className="absolute -left-[22%] top-[0%] h-[52%] w-[88%] rounded-full bg-[#6d3bd6]/60 blur-[70px]" />
-              <div className="absolute -right-[26%] top-[24%] h-[46%] w-[82%] rounded-full bg-[#e0518f]/55 blur-[70px]" />
-              <div className="absolute -bottom-[12%] left-[6%] h-[54%] w-[92%] rounded-full bg-[#f2a03d]/50 blur-[80px]" />
-              <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_0%,rgba(255,255,255,0.2),transparent_55%)]" />
-            </motion.div>
+            {/*
+              Wallpaper: three painted radial-gradients baked into one paint.
+              No filter:blur() layers — those are far too expensive on a phone GPU.
+            */}
+            <div className="absolute inset-0 bg-[linear-gradient(168deg,#2a1a4d_0%,#4a2a6b_26%,#8b3a6b_54%,#cf6f4f_78%,#f0a05f_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(58%_38%_at_12%_6%,rgba(109,59,214,0.85)_0%,rgba(109,59,214,0)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(52%_34%_at_92%_30%,rgba(224,81,143,0.75)_0%,rgba(224,81,143,0)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(70%_38%_at_38%_100%,rgba(242,160,61,0.7)_0%,rgba(242,160,61,0)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(120%_70%_at_50%_0%,rgba(255,255,255,0.18)_0%,rgba(255,255,255,0)_60%)]" />
 
-            {/* Home screen */}
-            <AnimatePresence>
-              {!openApp && (
-                <motion.div
-                  key="home"
-                  initial={{ opacity: 0, scale: 1.05 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.26, ease: EASE }}
-                  className="relative flex min-h-0 flex-1 flex-col"
-                >
-                  <HomeScreen page={page} setPage={setPage} onOpenApp={launch} />
-                </motion.div>
+            {/*
+              Home screen stays mounted while an app is open — only its scale
+              changes, which is a compositor-only transform. Remounting it used
+              to re-run every widget/icon animation on each app open.
+            */}
+            <motion.div
+              className={cn(
+                "relative flex min-h-0 flex-1 flex-col",
+                openApp && "pointer-events-none",
               )}
-            </AnimatePresence>
+              animate={{ scale: openApp ? 0.93 : 1 }}
+              transition={{ type: "spring", stiffness: 380, damping: 36 }}
+              style={{ willChange: openApp ? "transform" : "auto" }}
+            >
+              <HomeScreen page={page} setPage={setPage} onOpenApp={launch} />
+            </motion.div>
 
             {/* Foreground app */}
             <AnimatePresence>
@@ -110,9 +111,10 @@ export default function IPhoneShell() {
                   key={openApp}
                   initial={{ x: "100%" }}
                   animate={{ x: 0 }}
-                  exit={{ x: "100%", transition: { duration: 0.26, ease: EASE } }}
-                  transition={OPEN_SPRING}
+                  exit={{ x: "100%", transition: { duration: 0.24, ease: [0.32, 0.72, 0, 1] } }}
+                  transition={APP_TRANSITION}
                   className="absolute inset-0 z-30 flex flex-col"
+                  style={{ willChange: "transform" }}
                 >
                   {renderApp(openApp, goHome)}
                 </motion.div>

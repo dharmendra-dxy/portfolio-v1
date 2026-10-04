@@ -1,12 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { skills } from "@/constant/skills";
-import { AppScreen } from "../ios-ui";
 import { cn } from "@/lib/utils";
+import { AppScreen } from "../ios-ui";
 import { skillTileClass } from "@/components/skill-tile";
 
 type Group = "All" | "Frontend" | "Backend" | "Data" | "Tools";
@@ -33,11 +31,17 @@ export default function SkillsApp({ onBack }: { onBack: () => void }) {
     );
   }, [group, query]);
 
+  const activeIndex = GROUPS.indexOf(group);
+
   return (
     <AppScreen title="Skills" onBack={onBack} bare>
-      {/* Segmented control */}
-      <div className="sticky top-[88px] z-20 bg-[#f2f2f7]/85 px-4 pt-2 backdrop-blur-xl">
-        <div className="flex rounded-lg bg-zinc-200/70 p-0.5">
+      {/* Segmented control — the pill slides with a compositor-only transform */}
+      <div className="sticky top-[88px] z-20 bg-[#f2f2f7] px-4 pt-2">
+        <div className="relative flex rounded-lg bg-zinc-200/70 p-0.5">
+          <span
+            className="absolute inset-y-0.5 left-0.5 w-[calc((100%-4px)/5)] rounded-[7px] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.12)] transition-transform duration-200 ease-out"
+            style={{ transform: `translateX(${activeIndex * 100}%)` }}
+          />
           {GROUPS.map((name) => (
             <button
               key={name}
@@ -45,16 +49,7 @@ export default function SkillsApp({ onBack }: { onBack: () => void }) {
               onClick={() => setGroup(name)}
               className="relative flex-1 rounded-[7px] px-1 py-1.5 text-[12px] font-medium"
             >
-              {group === name && (
-                <motion.span
-                  layoutId="skill-segment"
-                  transition={{ type: "spring", stiffness: 420, damping: 34 }}
-                  className="absolute inset-0 rounded-[7px] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.12)]"
-                />
-              )}
-              <span
-                className={`relative ${group === name ? "text-zinc-900" : "text-zinc-500"}`}
-              >
+              <span className={group === name ? "text-zinc-900" : "text-zinc-500"}>
                 {name}
               </span>
             </button>
@@ -74,25 +69,19 @@ export default function SkillsApp({ onBack }: { onBack: () => void }) {
 
       <div className="px-4 pt-3">
         <div className="grid grid-cols-3 gap-2.5">
-          {visible.map((skill, index) => (
-            <motion.div
+          {visible.map((skill) => (
+            <div
               key={skill.title}
-              layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                type: "spring",
-                stiffness: 340,
-                damping: 26,
-                delay: Math.min(index * 0.025, 0.35),
-              }}
-              className="flex flex-col items-center gap-1.5 rounded-2xl bg-white px-1 py-3 shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
+              className="flex flex-col items-center gap-1.5 rounded-2xl bg-white px-1 py-3"
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={skill.icon}
                 alt={skill.title}
                 width={44}
                 height={44}
+                loading="lazy"
+                decoding="async"
                 className={cn(
                   "h-11 w-11 rounded-[10px] object-cover",
                   skillTileClass(skill.title),
@@ -101,7 +90,7 @@ export default function SkillsApp({ onBack }: { onBack: () => void }) {
               <span className="text-center text-[11px] font-medium leading-tight text-zinc-700">
                 {skill.title}
               </span>
-            </motion.div>
+            </div>
           ))}
         </div>
 

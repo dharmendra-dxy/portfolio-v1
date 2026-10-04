@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { Check, Mail, Phone, Send } from "lucide-react";
 import { profile } from "@/constant/profile";
 import { SOCIAL_LINKS } from "@/constant/social";
@@ -84,19 +83,12 @@ export default function ContactApp({ onBack }: { onBack: () => void }) {
         </form>
       </Section>
 
-      <AnimatePresence>
-        {sent && (
-          <motion.p
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className="mx-4 mt-3 flex items-center gap-2 rounded-xl bg-emerald-50 px-3.5 py-3 text-[14px] font-medium text-emerald-700"
-          >
-            <Check className="h-4 w-4 shrink-0" />
-            Message sent — talk soon.
-          </motion.p>
-        )}
-      </AnimatePresence>
+      {sent && (
+        <p className="mx-4 mt-3 flex items-center gap-2 rounded-xl bg-emerald-50 px-3.5 py-3 text-[14px] font-medium text-emerald-700">
+          <Check className="h-4 w-4 shrink-0" />
+          Message sent — talk soon.
+        </p>
+      )}
 
       <Section title="Direct">
         <Row

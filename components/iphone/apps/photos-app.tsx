@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { works } from "@/constant/works";
+import { cloudinaryImage } from "@/lib/cloudinary";
 import { cn } from "@/lib/utils";
 import { AppScreen } from "../ios-ui";
 
@@ -17,32 +18,24 @@ export default function PhotosApp({ onBack }: { onBack: () => void }) {
       <AppScreen title="Gallery" onBack={onBack} bare>
         <div className="grid grid-cols-2 gap-1 px-1">
           {works.map((item, itemIndex) => (
-            <motion.button
+            <button
               key={item.title}
               type="button"
-              initial={{ opacity: 0, scale: 0.94 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 26,
-                delay: itemIndex * 0.04,
-              }}
-              whileTap={{ scale: 0.97 }}
               onClick={() => setIndex(itemIndex)}
-              className="relative aspect-square overflow-hidden bg-zinc-200"
+              className="relative aspect-square overflow-hidden bg-zinc-200 transition-transform duration-100 active:scale-[0.97]"
             >
               {item.cover && (
                 <Image
-                  src={item.cover}
+                  src={cloudinaryImage(item.cover, 400) as string}
                   alt={item.title}
                   fill
                   sizes="200px"
                   unoptimized
+                  loading="lazy"
                   className="object-cover"
                 />
               )}
-            </motion.button>
+            </button>
           ))}
         </div>
 
@@ -59,12 +52,13 @@ export default function PhotosApp({ onBack }: { onBack: () => void }) {
             exit={{ opacity: 0, scale: 1.04 }}
             transition={{ duration: 0.22, ease: [0.32, 0.72, 0, 1] }}
             className="absolute inset-0 z-50 flex flex-col bg-black"
+            style={{ willChange: "transform, opacity" }}
           >
             <div className="relative min-h-0 flex-1">
               {work.cover && (
                 <div className="absolute inset-0">
                   <Image
-                    src={work.cover}
+                    src={cloudinaryImage(work.cover, 900) as string}
                     alt={work.title}
                     fill
                     sizes="400px"
@@ -78,7 +72,7 @@ export default function PhotosApp({ onBack }: { onBack: () => void }) {
                 type="button"
                 onClick={() => setIndex(null)}
                 aria-label="Close"
-                className="absolute right-3 top-12 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md active:bg-white/25"
+                className="absolute right-3 top-12 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-black/35 text-white active:bg-black/55"
               >
                 <X className="h-5 w-5" />
               </button>

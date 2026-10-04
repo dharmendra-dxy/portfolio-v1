@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Eye, FileText } from "lucide-react";
 import { profile } from "@/constant/profile";
 import { AppScreen, Row, Section } from "../ios-ui";
@@ -12,12 +11,7 @@ export default function ResumeApp({ onBack }: { onBack: () => void }) {
 
   return (
     <AppScreen title="Résumé" onBack={onBack}>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: "spring", stiffness: 280, damping: 26 }}
-        className="mx-4 mt-3 flex flex-col items-center rounded-2xl bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.05)]"
-      >
+      <div className="mx-4 mt-3 flex flex-col items-center rounded-2xl bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.05)]">
         <span className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-400 to-rose-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]">
           <FileText className="h-9 w-9" />
         </span>
@@ -37,7 +31,7 @@ export default function ResumeApp({ onBack }: { onBack: () => void }) {
           <Eye className="h-4 w-4" />
           Open résumé
         </a>
-      </motion.div>
+      </div>
 
       <Section
         title="On this device"

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpLeft, Github, Search, X } from "lucide-react";
 import { works } from "@/constant/works";
+import { cloudinaryImage } from "@/lib/cloudinary";
 import { AppScreen } from "../ios-ui";
 
 type Work = (typeof works)[number];
@@ -37,7 +38,7 @@ export default function ProjectsApp({ onBack }: { onBack: () => void }) {
       <AppScreen title="Projects" onBack={onBack} bare={!!open}>
         {!open && (
           <>
-            <label className="mx-4 mb-3 mt-2 flex h-9 items-center gap-2 rounded-xl bg-white px-3 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+            <label className="mx-4 mb-3 mt-2 flex h-9 items-center gap-2 rounded-xl bg-white px-3">
               <Search className="h-4 w-4 shrink-0 text-zinc-400" />
               <input
                 value={query}
@@ -48,36 +49,24 @@ export default function ProjectsApp({ onBack }: { onBack: () => void }) {
             </label>
 
             <div className="grid grid-cols-2 gap-3 px-4">
-              {visible.map((work, index) => (
-                <motion.button
+              {visible.map((work) => (
+                <button
                   key={work.title}
                   type="button"
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 280,
-                    damping: 26,
-                    delay: index * 0.05,
-                  }}
-                  whileTap={{ scale: 0.96 }}
                   onClick={() => setOpen(work)}
-                  className="overflow-hidden rounded-2xl bg-white text-left shadow-[0_1px_2px_rgba(0,0,0,0.05)]"
+                  className="overflow-hidden rounded-2xl bg-white text-left transition-transform duration-100 active:scale-[0.97]"
                 >
                   <div className="relative aspect-[4/3] w-full bg-zinc-100">
-                    {work.cover ? (
+                    {work.cover && (
                       <Image
-                        src={work.cover}
+                        src={cloudinaryImage(work.cover, 400) as string}
                         alt={work.title}
                         fill
                         sizes="200px"
                         unoptimized
+                        loading="lazy"
                         className="object-cover"
                       />
-                    ) : (
-                      <div className="flex h-full items-center justify-center text-[12px] text-zinc-400">
-                        No preview
-                      </div>
                     )}
                   </div>
                   <div className="p-2.5">
@@ -88,7 +77,7 @@ export default function ProjectsApp({ onBack }: { onBack: () => void }) {
                       {work.description}
                     </p>
                   </div>
-                </motion.button>
+                </button>
               ))}
             </div>
 
@@ -107,10 +96,11 @@ export default function ProjectsApp({ onBack }: { onBack: () => void }) {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 16 }}
-            transition={{ type: "spring", stiffness: 340, damping: 32 }}
+            transition={{ duration: 0.24, ease: [0.32, 0.72, 0, 1] }}
             className="absolute inset-0 z-50 flex flex-col bg-[#f2f2f7]"
+            style={{ willChange: "transform" }}
           >
-            <div className="absolute inset-x-0 top-11 z-20 flex h-11 items-center justify-center border-b border-black/[0.08] bg-white/80 px-3 backdrop-blur-xl">
+            <div className="absolute inset-x-0 top-11 z-20 flex h-11 items-center justify-center border-b border-black/[0.08] bg-[#f7f7f9]/95 px-3">
               <button
                 type="button"
                 onClick={() => setOpen(null)}
@@ -120,7 +110,7 @@ export default function ProjectsApp({ onBack }: { onBack: () => void }) {
                 <ArrowUpLeft className="h-5 w-5" strokeWidth={2.6} />
                 <span>Projects</span>
               </button>
-              <span className="text-[16px] font-semibold text-zinc-900">
+              <span className="mx-auto max-w-[46%] truncate px-2 text-[16px] font-semibold text-zinc-900">
                 {open.title}
               </span>
               <button
@@ -137,7 +127,7 @@ export default function ProjectsApp({ onBack }: { onBack: () => void }) {
               {open.cover && (
                 <div className="relative aspect-[16/10] w-full bg-zinc-100">
                   <Image
-                    src={open.cover}
+                    src={cloudinaryImage(open.cover, 800) as string}
                     alt={open.title}
                     fill
                     sizes="400px"
@@ -185,6 +175,7 @@ export default function ProjectsApp({ onBack }: { onBack: () => void }) {
                             alt={tech.name}
                             width={13}
                             height={13}
+                            loading="lazy"
                             className="h-[13px] w-[13px]"
                           />
                         )}

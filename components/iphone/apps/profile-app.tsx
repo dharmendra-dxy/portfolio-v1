@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   Github,
@@ -30,12 +29,7 @@ export default function ProfileApp({ onBack }: { onBack: () => void }) {
     <AppScreen title="Profile" onBack={onBack}>
       {/* Hero */}
       <div className="px-4 pt-2">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ type: "spring", stiffness: 260, damping: 24 }}
-          className="overflow-hidden rounded-2xl bg-white p-5 text-center shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
-        >
+        <div className="overflow-hidden rounded-2xl bg-white p-5 text-center shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
           <div className="relative mx-auto w-fit">
             <Image
               src={profile.avatar}
@@ -84,7 +78,7 @@ export default function ProfileApp({ onBack }: { onBack: () => void }) {
               );
             })}
           </div>
-        </motion.div>
+        </div>
       </div>
 
       <Section title="Currently building with">

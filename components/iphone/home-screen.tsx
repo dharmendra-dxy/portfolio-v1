@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { animate, motion, useMotionValue } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
@@ -8,8 +8,8 @@ import { profile } from "@/constant/profile";
 import { experience } from "@/constant/experience";
 import { skills } from "@/constant/skills";
 import { works } from "@/constant/works";
+import { cloudinaryImage } from "@/lib/cloudinary";
 import { cn } from "@/lib/utils";
-import { skillTileClass } from "@/components/skill-tile";
 import {
   DOCK_APPS,
   HOME_APPS,
@@ -20,7 +20,7 @@ import {
 
 /* ── App icon ─────────────────────────────────────────── */
 
-export function AppIcon({
+function AppIcon({
   app,
   size = 60,
   onClick,
@@ -30,13 +30,11 @@ export function AppIcon({
   onClick?: () => void;
 }) {
   return (
-    <motion.button
+    <button
       type="button"
       onClick={onClick}
-      whileTap={{ scale: 0.88, opacity: 0.8 }}
-      transition={{ type: "spring", stiffness: 500, damping: 26 }}
       aria-label={app.label}
-      className="relative flex shrink-0 flex-col items-center gap-1"
+      className="flex shrink-0 flex-col items-center gap-1 transition-transform duration-100 active:scale-[0.88]"
     >
       <span
         className={cn(
@@ -56,7 +54,7 @@ export function AppIcon({
       <span className="max-w-full truncate text-[11px] font-medium text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]">
         {app.label}
       </span>
-    </motion.button>
+    </button>
   );
 }
 
@@ -71,19 +69,14 @@ function AvailabilityWidget() {
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 14, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ type: "spring", stiffness: 260, damping: 26, delay: 0.1 }}
-      className="w-full overflow-hidden rounded-[22px] bg-white/18 p-3.5 backdrop-blur-2xl ring-1 ring-white/25"
-    >
+    <div className="w-full overflow-hidden rounded-[22px] bg-[#2a1b3d]/45 p-3.5 ring-1 ring-white/25">
       <div className="flex items-center gap-3">
         <Image
           src={profile.avatar}
           alt={profile.name}
           width={44}
           height={44}
-          className="h-11 w-11 rounded-full object-cover ring-2 ring-white/70"
+          className="h-11 w-11 shrink-0 rounded-full object-cover ring-2 ring-white/70"
         />
         <div className="min-w-0 flex-1">
           <p className="truncate text-[15px] font-semibold text-white">
@@ -100,7 +93,7 @@ function AvailabilityWidget() {
         <Sparkles className="h-4 w-4 shrink-0 text-white/70" />
       </div>
 
-      <div className="mt-3 grid grid-cols-3 gap-1 rounded-xl bg-black/20 py-2">
+      <div className="mt-3 grid grid-cols-3 gap-1 rounded-xl bg-black/25 py-2">
         {stats.map((stat) => (
           <div key={stat.label} className="text-center">
             <p className="text-[15px] font-semibold tabular-nums text-white">
@@ -112,21 +105,17 @@ function AvailabilityWidget() {
           </div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 function RecentWorkWidget({ onOpen }: { onOpen: () => void }) {
   const recent = works[0];
   return (
-    <motion.button
+    <button
       type="button"
       onClick={onOpen}
-      initial={{ opacity: 0, y: 14, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ type: "spring", stiffness: 260, damping: 26, delay: 0.1 }}
-      whileTap={{ scale: 0.96 }}
-      className="w-full overflow-hidden rounded-[22px] bg-white/18 text-left backdrop-blur-2xl ring-1 ring-white/25"
+      className="w-full overflow-hidden rounded-[22px] bg-[#2a1b3d]/45 text-left ring-1 ring-white/25 transition-transform duration-100 active:scale-[0.98]"
     >
       <div className="flex items-center justify-between px-3 pt-2.5">
         <p className="text-[11px] font-semibold uppercase tracking-wide text-white/70">
@@ -138,10 +127,10 @@ function RecentWorkWidget({ onOpen }: { onOpen: () => void }) {
         <div className="relative aspect-[12/5] w-full overflow-hidden rounded-[14px] bg-black/30 ring-1 ring-white/20">
           {recent?.cover && (
             <Image
-              src={recent.cover}
+              src={cloudinaryImage(recent.cover, 640) as string}
               alt={recent.title}
               fill
-              sizes="300px"
+              sizes="340px"
               unoptimized
               className="object-cover"
             />
@@ -154,48 +143,44 @@ function RecentWorkWidget({ onOpen }: { onOpen: () => void }) {
           {recent?.description}
         </p>
       </div>
-    </motion.button>
+    </button>
   );
 }
 
 function StackWidget({ onOpen }: { onOpen: () => void }) {
   const featured = skills.slice(0, 8);
   return (
-    <motion.button
+    <button
       type="button"
       onClick={onOpen}
-      initial={{ opacity: 0, y: 14, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ type: "spring", stiffness: 260, damping: 26, delay: 0.18 }}
-      whileTap={{ scale: 0.96 }}
-      className="w-full overflow-hidden rounded-[22px] bg-white/18 p-3 text-left backdrop-blur-2xl ring-1 ring-white/25"
+      className="w-full rounded-[22px] bg-[#2a1b3d]/45 p-3 text-left ring-1 ring-white/25 transition-transform duration-100 active:scale-[0.98]"
     >
       <p className="text-[11px] font-semibold uppercase tracking-wide text-white/70">
         The stack
       </p>
-      <div className="mt-2.5 grid grid-cols-4 gap-2">
+      <div className="mt-2.5 grid grid-cols-4 gap-1.5">
         {featured.map((skill) => (
           <span
             key={skill.title}
-            className="flex aspect-square items-center justify-center rounded-[10px] bg-white/85"
+            className="flex h-9 items-center justify-center rounded-[10px] bg-white/90"
           >
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={skill.icon}
               alt={skill.title}
               width={22}
               height={22}
-              className={cn(
-                "h-[22px] w-[22px] rounded-[5px] object-cover",
-                skillTileClass(skill.title),
-              )}
+              loading="lazy"
+              decoding="async"
+              className="h-[22px] w-[22px] rounded-[5px] object-cover"
             />
           </span>
         ))}
       </div>
-      <p className="mt-2.5 text-[12px] text-white/70">
+      <p className="mt-2 text-[11.5px] text-white/70">
         +{Math.max(0, skills.length - featured.length)} more technologies
       </p>
-    </motion.button>
+    </button>
   );
 }
 
@@ -225,15 +210,12 @@ export default function HomeScreen({ page, setPage, onOpenApp }: HomeScreenProps
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    animate(x, -page * width, { type: "spring", stiffness: 320, damping: 34 });
+  useLayoutEffect(() => {
+    animate(x, -page * width, { type: "spring", stiffness: 340, damping: 36 });
   }, [page, width, x]);
 
   const pages = [
-    {
-      apps: HOME_APPS,
-      widgets: [<AvailabilityWidget key="w1" />],
-    },
+    { apps: HOME_APPS, widgets: [<AvailabilityWidget key="w1" />] },
     {
       apps: PAGE_TWO_APPS,
       widgets: [
@@ -246,17 +228,14 @@ export default function HomeScreen({ page, setPage, onOpenApp }: HomeScreenProps
   ];
 
   const settle = () =>
-    animate(x, -page * width, { type: "spring", stiffness: 320, damping: 34 });
+    animate(x, -page * width, { type: "spring", stiffness: 340, damping: 36 });
 
   return (
     <div className="flex min-h-0 w-full flex-1 flex-col">
-      <div
-        ref={viewportRef}
-        className="min-h-0 flex-1 overflow-hidden pt-[52px]"
-      >
+      <div ref={viewportRef} className="min-h-0 flex-1 overflow-hidden pt-[52px]">
         <motion.div
-          className="flex h-full"
-          style={{ x, width: width * pages.length }}
+          className="flex h-full touch-pan-y"
+          style={{ x, width: width * pages.length, willChange: "transform" }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.16}
@@ -301,7 +280,7 @@ export default function HomeScreen({ page, setPage, onOpenApp }: HomeScreenProps
           >
             <span
               className={cn(
-                "block h-[7px] w-[7px] rounded-full transition-all duration-300",
+                "block h-[7px] w-[7px] rounded-full transition-colors duration-200",
                 index === page ? "bg-white" : "bg-white/45",
               )}
             />
@@ -310,8 +289,8 @@ export default function HomeScreen({ page, setPage, onOpenApp }: HomeScreenProps
       </div>
 
       {/* Dock */}
-      <div className="flex-none px-3 pb-7">
-        <div className="flex items-end justify-around rounded-[30px] bg-white/16 px-2 py-2.5 backdrop-blur-2xl ring-1 ring-white/20">
+      <div className="flex-none px-3 pb-8">
+        <div className="flex items-end justify-around rounded-[30px] bg-white/25 px-2 py-2.5 ring-1 ring-white/30">
           {DOCK_APPS.map((app) => (
             <AppIcon
               key={app.id}

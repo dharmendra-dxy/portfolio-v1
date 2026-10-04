@@ -16,20 +16,12 @@ export default function ExperienceApp({ onBack }: { onBack: () => void }) {
   return (
     <AppScreen title="Experience" onBack={onBack}>
       <div className="mt-3 space-y-3 px-4">
-        {experience.map((item, index) => {
+        {experience.map((item) => {
           const key = `${item.company}-${item.role}`;
           const open = expanded === key;
           return (
-            <motion.div
+            <div
               key={item.id}
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 280,
-                damping: 26,
-                delay: index * 0.07,
-              }}
               className="overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)]"
             >
               <button
@@ -94,7 +86,7 @@ export default function ExperienceApp({ onBack }: { onBack: () => void }) {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </div>
           );
         })}
       </div>
