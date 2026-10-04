@@ -63,3 +63,5 @@ export const experience = [
         ]
     },
 ]
+
+export const totalExperience = "1.5+ yrs"

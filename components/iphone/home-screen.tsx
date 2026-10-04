@@ -5,7 +5,7 @@ import Image from "next/image";
 import { animate, motion, useMotionValue } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { profile } from "@/constant/profile";
-import { experience } from "@/constant/experience";
+import { experience, totalExperience } from "@/constant/experience";
 import { skills } from "@/constant/skills";
 import { works } from "@/constant/works";
 import { cloudinaryImage } from "@/lib/cloudinary";
@@ -63,7 +63,7 @@ function AppIcon({
 function AvailabilityWidget() {
   const current = experience[experience.length - 1];
   const stats = [
-    { label: "Experience", value: `${new Date().getFullYear() - 2022}+ yrs` },
+    { label: "Experience", value: `${totalExperience}` },
     { label: "Projects", value: `${works.length}` },
     { label: "Stack", value: `${skills.length}` },
   ];

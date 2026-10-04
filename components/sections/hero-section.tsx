@@ -5,12 +5,13 @@ import React from "react";
 import { Button } from "../ui/button";
 import { AnimatedGroup } from "../ui/animated-group";
 import Badge from "../badge";
+import ViewToggle from "../view-toggle";
 import { customItemVariants, sectionContainerVariants } from "@/lib/framer-variants";
 
 const HeroSection = () => {
   return (
     <div>
-      <header className="flex items-center space-x-4">
+      <header className="flex flex-wrap items-center gap-x-4 gap-y-4">
         <Image
           src={profile.avatar}
           alt={profile.name}
@@ -18,10 +19,13 @@ const HeroSection = () => {
           height={200}
           width={200}
         />
-        <div>
+        <div className="min-w-0">
           <h1 className="text-2xl font-bold">{profile.name}</h1>
+          <div className="flex">
           <p className="text-zinc-400">{profile.handle}</p>
+          </div>
         </div>
+        <ViewToggle className=" w-full items-center justify-end sm:ml-auto sm:w-auto sm:shrink-0" />
       </header>
 
       <section className="mt-16">

@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { profile } from "@/constant/profile";
-import { experience } from "@/constant/experience";
+import { experience, totalExperience } from "@/constant/experience";
 import { education } from "@/constant/education";
 import { FinderStatusBar, WindowHint } from "../finder-chrome";
 
@@ -25,7 +25,6 @@ const SOCIAL_LABEL: Record<string, string> = {
 
 export default function AboutWindow() {
   const currentRole = experience[experience.length - 1];
-  const years = new Date().getFullYear() - 2022;
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -84,7 +83,7 @@ export default function AboutWindow() {
         {/* Quick facts */}
         <div className="grid grid-cols-2 divide-x divide-black/5 border-b border-black/5 sm:grid-cols-4">
           {[
-            { label: "Experience", value: `${years}+ yrs`, icon: Briefcase },
+            { label: "Experience", value: `${totalExperience}`, icon: Briefcase },
             {
               label: "Currently",
               value: currentRole?.company ?? "—",
