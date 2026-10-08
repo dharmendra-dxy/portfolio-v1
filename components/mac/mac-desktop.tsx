@@ -26,6 +26,13 @@ import EducationWindow from "./windows/education-window";
 import ContactWindow from "./windows/contact-window";
 import TerminalWindow from "./windows/terminal-window";
 import BrowserWindow from "./windows/browser-window";
+import SettingsWindow from "./windows/settings-window";
+import {
+  DEFAULT_MAC_WALLPAPER_ID,
+  getWallpaper,
+  preloadWallpaper,
+  type Wallpaper,
+} from "@/constant/wallpaper";
 
 interface WindowRuntime {
   open: boolean;
@@ -41,14 +48,8 @@ const INITIAL_STATE: Record<WindowId, WindowRuntime> = {
   contact: { open: false, minimized: false },
   terminal: { open: false, minimized: false },
   browser: { open: false, minimized: false },
+  settings: { open: false, minimized: false },
 };
-
-const WALLPAPERS = [
-  "from-[#1b1f3b] via-[#2b1e4d] to-[#0b1020]",
-  "from-[#f7d9c4] via-[#e8a87c] to-[#c38d9e]",
-  "from-[#0f2027] via-[#203a43] to-[#2c5364]",
-  "from-[#fbc2eb] via-[#a6c1ee] to-[#e0c3fc]",
-];
 
 export default function MacDesktop() {
   const [bounds, setBounds] = useState({ width: 1440, height: 900 });
@@ -60,7 +61,9 @@ export default function MacDesktop() {
   const [spotlightOpen, setSpotlightOpen] = useState(false);
   const [quickLook, setQuickLook] = useState<WorkItem | null>(null);
   const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
-  const [wallpaper, setWallpaper] = useState(0);
+  const [wallpaper, setWallpaper] = useState<Wallpaper>(() =>
+    getWallpaper("mac", DEFAULT_MAC_WALLPAPER_ID),
+  );
   const [showDesktopIcons, setShowDesktopIcons] = useState(true);
   const [magnify, setMagnify] = useState(true);
   const [toast, setToast] = useState<string | null>(null);
@@ -315,6 +318,9 @@ export default function MacDesktop() {
       case "skills":
         openWindow("skills");
         break;
+      case "settings":
+        openWindow("settings");
+        break;
       case "close-all":
         closeAll();
         break;
@@ -325,7 +331,7 @@ export default function MacDesktop() {
         flash("macOS 15 · Portfolio build · 100% free of bugs.");
         break;
       case "wallpaper":
-        setWallpaper((prev) => (prev + 1) % WALLPAPERS.length);
+        openWindow("settings");
         break;
       case "refresh":
         setBounceMap((prev) => {
@@ -351,6 +357,11 @@ export default function MacDesktop() {
     setContextMenu({ x: event.clientX, y: event.clientY });
   };
 
+  const onWallpaperChange = useCallback((next: Wallpaper) => {
+    preloadWallpaper(next);
+    setWallpaper(next);
+  }, []);
+
   const isOpen = (id: WindowId) => !!state[id]?.open;
   const isMinimized = (id: WindowId) => !!state[id]?.minimized;
   const isActive = (id: WindowId) => activeId === id && !state[id]?.minimized;
@@ -360,18 +371,15 @@ export default function MacDesktop() {
       ref={rootRef}
       className="mac-font fixed inset-0 h-[100dvh] w-full overflow-hidden bg-black font-sans text-zinc-900"
     >
-      {/* Wallpaper */}
-      <div
-        className={cn(
-          "absolute inset-0 bg-gradient-to-br transition-all duration-700",
-          WALLPAPERS[wallpaper],
-        )}
-      >
-        <div className="absolute -left-[12%] top-[6%] h-[62vh] w-[62vh] rounded-full bg-fuchsia-500/25 blur-[110px]" />
-        <div className="absolute -right-[8%] top-[-6%] h-[58vh] w-[58vh] rounded-full bg-blue-500/30 blur-[110px]" />
-        <div className="absolute bottom-[-18%] left-[26%] h-[64vh] w-[64vh] rounded-full bg-orange-400/25 blur-[120px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_-10%,rgba(255,255,255,0.22),transparent_60%)]" />
-      </div>
+      {/* Wallpaper — one element, one paint, sourced from constant/wallpaper.ts */}
+      <motion.div
+        key={wallpaper.id}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.32, ease: "easeOut" }}
+        className="absolute inset-0"
+        style={{ background: wallpaper.background }}
+      />
 
       {/* Menu bar */}
       <MenuBar
@@ -420,6 +428,12 @@ export default function MacDesktop() {
                 {id === "contact" && <ContactWindow />}
                 {id === "terminal" && <TerminalWindow onOpenApp={openWindow} />}
                 {id === "browser" && <BrowserWindow onOpenApp={openWindow} />}
+                {id === "settings" && (
+                  <SettingsWindow
+                    wallpaper={wallpaper}
+                    onWallpaperChange={onWallpaperChange}
+                  />
+                )}
               </MacWindow>
             ),
           )}

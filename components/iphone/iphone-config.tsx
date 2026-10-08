@@ -6,6 +6,7 @@ import {
   Images,
   Link2,
   Mail,
+  Settings2,
   User,
 } from "lucide-react";
 
@@ -18,7 +19,8 @@ export type IPhoneAppId =
   | "contact"
   | "photos"
   | "links"
-  | "resume";
+  | "resume"
+  | "settings";
 
 export interface IPhoneApp {
   id: IPhoneAppId;
@@ -76,6 +78,12 @@ export const HOME_APPS: IPhoneApp[] = [
     icon: <Link2 className="h-full w-full" strokeWidth={1.8} />,
     gradient: "from-slate-200 via-slate-400 to-slate-700",
   },
+  {
+    id: "settings",
+    label: "Settings",
+    icon: <Settings2 className="h-full w-full" strokeWidth={1.8} />,
+    gradient: "from-zinc-300 via-zinc-400 to-zinc-600",
+  },
 ];
 
 export const PAGE_TWO_APPS: IPhoneApp[] = [
@@ -130,4 +138,5 @@ export const APP_TITLES: Record<IPhoneAppId, string> = {
   photos: "Gallery",
   links: "Links",
   resume: "Résumé",
+  settings: "Settings",
 };

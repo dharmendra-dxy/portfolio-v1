@@ -16,11 +16,27 @@ import ContactApp from "./apps/contact-app";
 import PhotosApp from "./apps/photos-app";
 import LinksApp from "./apps/links-app";
 import ResumeApp from "./apps/resume-app";
+import SettingsApp from "./apps/settings-app";
 import { APP_TITLES } from "./iphone-config";
+import {
+  DEFAULT_IPHONE_WALLPAPER_ID,
+  getWallpaper,
+  preloadWallpaper,
+  type Wallpaper,
+} from "@/constant/wallpaper";
 
 const APP_TRANSITION = { type: "spring" as const, stiffness: 420, damping: 40, mass: 0.8 };
 
-function renderApp(id: IPhoneAppId, onBack: () => void) {
+interface RenderAppProps {
+  wallpaper: Wallpaper;
+  onWallpaperChange: (wallpaper: Wallpaper) => void;
+}
+
+function renderApp(
+  id: IPhoneAppId,
+  onBack: () => void,
+  { wallpaper, onWallpaperChange }: RenderAppProps,
+) {
   switch (id) {
     case "profile":
       return <ProfileApp onBack={onBack} />;
@@ -40,6 +56,14 @@ function renderApp(id: IPhoneAppId, onBack: () => void) {
       return <LinksApp onBack={onBack} />;
     case "resume":
       return <ResumeApp onBack={onBack} />;
+    case "settings":
+      return (
+        <SettingsApp
+          wallpaper={wallpaper}
+          onWallpaperChange={onWallpaperChange}
+          onBack={onBack}
+        />
+      );
     default:
       return null;
   }
@@ -48,9 +72,17 @@ function renderApp(id: IPhoneAppId, onBack: () => void) {
 export default function IPhoneShell() {
   const [openApp, setOpenApp] = useState<IPhoneAppId | null>(null);
   const [page, setPage] = useState(0);
+  const [wallpaper, setWallpaper] = useState<Wallpaper>(() =>
+    getWallpaper("iphone", DEFAULT_IPHONE_WALLPAPER_ID),
+  );
 
   const goHome = useCallback(() => setOpenApp(null), []);
   const launch = useCallback((id: IPhoneAppId) => setOpenApp(id), []);
+
+  const onWallpaperChange = useCallback((next: Wallpaper) => {
+    preloadWallpaper(next);
+    setWallpaper(next);
+  }, []);
 
   return (
     <div
@@ -78,14 +110,18 @@ export default function IPhoneShell() {
         >
           <div className="relative flex h-full w-full flex-col overflow-hidden bg-black sm:rounded-[45px]">
             {/*
-              Wallpaper: three painted radial-gradients baked into one paint.
-              No filter:blur() layers — those are far too expensive on a phone GPU.
+              One element, one paint, driven by constant/wallpaper.ts.
+              `key` remounts on change so the fade below stays a
+              compositor-only opacity animation — no blur filters anywhere.
             */}
-            <div className="absolute inset-0 bg-[linear-gradient(168deg,#2a1a4d_0%,#4a2a6b_26%,#8b3a6b_54%,#cf6f4f_78%,#f0a05f_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(58%_38%_at_12%_6%,rgba(109,59,214,0.85)_0%,rgba(109,59,214,0)_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(52%_34%_at_92%_30%,rgba(224,81,143,0.75)_0%,rgba(224,81,143,0)_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(70%_38%_at_38%_100%,rgba(242,160,61,0.7)_0%,rgba(242,160,61,0)_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(120%_70%_at_50%_0%,rgba(255,255,255,0.18)_0%,rgba(255,255,255,0)_60%)]" />
+            <motion.div
+              key={wallpaper.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.26, ease: "easeOut" }}
+              className="absolute inset-0"
+              style={{ background: wallpaper.background }}
+            />
 
             {/*
               Home screen stays mounted while an app is open — only its scale
@@ -116,7 +152,7 @@ export default function IPhoneShell() {
                   className="absolute inset-0 z-30 flex flex-col"
                   style={{ willChange: "transform" }}
                 >
-                  {renderApp(openApp, goHome)}
+                  {renderApp(openApp, goHome, { wallpaper, onWallpaperChange })}
                 </motion.div>
               )}
             </AnimatePresence>

@@ -6,6 +6,7 @@ import {
   GraduationCap,
   Globe,
   Mail,
+  Settings2,
   SquareTerminal,
   User,
 } from "lucide-react";
@@ -18,7 +19,8 @@ export type WindowId =
   | "education"
   | "contact"
   | "terminal"
-  | "browser";
+  | "browser"
+  | "settings";
 
 export const WINDOW_IDS: WindowId[] = [
   "about",
@@ -29,6 +31,7 @@ export const WINDOW_IDS: WindowId[] = [
   "contact",
   "terminal",
   "browser",
+  "settings",
 ];
 
 export interface WindowConfig {
@@ -124,6 +127,17 @@ export const WINDOW_CONFIG: Record<WindowId, WindowConfig> = {
     minWidth: 320,
     minHeight: 240,
   },
+  settings: {
+    id: "settings",
+    title: "System Settings",
+    appName: "System Settings",
+    path: "System Settings \u203a Wallpaper",
+    icon: <Settings2 className="h-full w-full" strokeWidth={1.7} />,
+    width: 700,
+    height: 560,
+    minWidth: 360,
+    minHeight: 320,
+  },
   browser: {
     id: "browser",
     title: "Safari",
@@ -188,6 +202,13 @@ export const DOCK_APPS: DockApp[] = [
 ];
 
 export const DOCK_TOOLS: DockApp[] = [
+  {
+    id: "settings",
+    label: "System Settings",
+    icon: <Settings2 className="h-full w-full" strokeWidth={1.7} />,
+    gradient: "from-zinc-300 via-zinc-400 to-zinc-600",
+    kind: "tool",
+  },
   {
     id: "terminal",
     label: "Terminal",
