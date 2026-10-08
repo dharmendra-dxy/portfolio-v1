@@ -117,10 +117,15 @@ export default function MenuBar({
           items={[
             { label: "About This Portfolio", onSelect: () => onOpenMenu?.("about") },
             { separator: true },
-            { label: "System Settings\u2026", onSelect: () => onOpenMenu?.("skills") },
+            { label: "System Settings\u2026", onSelect: () => onOpenMenu?.("settings") },
             {
               label: "Appearance",
               onSelect: onToggleDark,
+            },
+            { separator: true },
+            {
+              label: "Change Wallpaper\u2026",
+              onSelect: () => onOpenMenu?.("wallpaper"),
             },
             { separator: true },
             { label: "Empty Trash\u2026", disabled: true },

@@ -69,7 +69,7 @@ function AvailabilityWidget() {
   ];
 
   return (
-    <div className="w-full overflow-hidden rounded-[22px] bg-[#2a1b3d]/45 p-3.5 ring-1 ring-white/25">
+    <div className="w-full overflow-hidden rounded-[22px] bg-neutral-950/45 p-3.5 ring-1 ring-white/30">
       <div className="flex items-center gap-3">
         <Image
           src={profile.avatar}
@@ -115,7 +115,7 @@ function RecentWorkWidget({ onOpen }: { onOpen: () => void }) {
     <button
       type="button"
       onClick={onOpen}
-      className="w-full overflow-hidden rounded-[22px] bg-[#2a1b3d]/45 text-left ring-1 ring-white/25 transition-transform duration-100 active:scale-[0.98]"
+      className="w-full overflow-hidden rounded-[22px] bg-neutral-950/45 text-left ring-1 ring-white/30 transition-transform duration-100 active:scale-[0.98]"
     >
       <div className="flex items-center justify-between px-3 pt-2.5">
         <p className="text-[11px] font-semibold uppercase tracking-wide text-white/70">
@@ -153,7 +153,7 @@ function StackWidget({ onOpen }: { onOpen: () => void }) {
     <button
       type="button"
       onClick={onOpen}
-      className="w-full rounded-[22px] bg-[#2a1b3d]/45 p-3 text-left ring-1 ring-white/25 transition-transform duration-100 active:scale-[0.98]"
+      className="w-full rounded-[22px] bg-neutral-950/45 p-3 text-left ring-1 ring-white/30 transition-transform duration-100 active:scale-[0.98]"
     >
       <p className="text-[11px] font-semibold uppercase tracking-wide text-white/70">
         The stack
@@ -290,7 +290,7 @@ export default function HomeScreen({ page, setPage, onOpenApp }: HomeScreenProps
 
       {/* Dock */}
       <div className="flex-none px-3 pb-8">
-        <div className="flex items-end justify-around rounded-[30px] bg-white/25 px-2 py-2.5 ring-1 ring-white/30">
+        <div className="flex items-end justify-around rounded-[30px] bg-white/35 px-2 py-2.5 ring-1 ring-white/40">
           {DOCK_APPS.map((app) => (
             <AppIcon
               key={app.id}
