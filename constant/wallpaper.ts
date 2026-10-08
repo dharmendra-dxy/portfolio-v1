@@ -40,9 +40,9 @@ export const MAC_WALLPAPERS: Wallpaper[] = [
 /* ── iOS wallpapers ────────────────────────────────────── */
 
 export const IPHONE_WALLPAPERS: Wallpaper[] = [
-  { id: "iphone-1", name: "Wallpaper 01", background: "url('/wallpapers/iphone-1.jpg') center/cover no-repeat" },
+  { id: "iphone-1", name: "Wallpaper 01", background: "url('/wallpapers/iphone-3.jpg') center/cover no-repeat" },
   { id: "iphone-2", name: "Wallpaper 02", background: "url('/wallpapers/iphone-2.jpg') center/cover no-repeat" },
-  { id: "iphone-3", name: "Wallpaper 03", background: "url('/wallpapers/iphone-3.jpg') center/cover no-repeat" },
+  { id: "iphone-3", name: "Wallpaper 03", background: "url('/wallpapers/iphone-1.jpg') center/cover no-repeat" },
   { id: "iphone-4", name: "Wallpaper 04", background: "url('/wallpapers/iphone-4.jpg') center/cover no-repeat" },
   { id: "iphone-5", name: "Wallpaper 05", background: "url('/wallpapers/iphone-5.jpg') center/cover no-repeat" },
   { id: "iphone-6", name: "Wallpaper 06", background: "url('/wallpapers/iphone-6.jpg') center/cover no-repeat" },
